@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {}
+    "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {
+    "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+        "projectUniqueName": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
         "projectName": "main",
-        "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+        "projectPath": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
         "packagesPath": "C:\\Users\\Jason Kim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
+        "outputPath": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jason Kim\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.8, )"
+            },
+            "Scalar.AspNetCore": {
+              "target": "Package",
+              "version": "[2.6.9, )"
             }
           },
           "imports": [
