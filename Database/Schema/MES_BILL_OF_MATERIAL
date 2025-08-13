@@ -1,0 +1,5 @@
+load data
+infile 'bom.csv'
+into table MES_BILL_OF_MATERIAL
+fields terminated by "," optionally enclosed by '"'
+( PRODUCT_ID, PRODUCT_DESC, PRODUCT_FAMILY_CODE, UNIT_OF_MEASURE )
