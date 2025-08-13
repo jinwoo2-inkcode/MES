@@ -80,11 +80,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\WebApplication1\\WebApplication1.csproj",
-      "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+      "projectName": "main",
+      "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
       "packagesPath": "C:\\Users\\Jason Kim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jason Kim\\AppData\\Roaming\\NuGet\\NuGet.Config"
