@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {}
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+        "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
         "projectName": "main",
-        "projectPath": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+        "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
         "packagesPath": "C:\\Users\\Jason Kim\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
+        "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jason Kim\\AppData\\Roaming\\NuGet\\NuGet.Config"
