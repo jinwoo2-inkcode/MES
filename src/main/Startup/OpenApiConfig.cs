@@ -9,7 +9,7 @@ public static class OpenAPIConfig
 {
 
     //connection string variable - did not decide where to put this
-    public static string ConnectionString = "";//"Data Source=UMAIR;Initial Catalog=Air; Trusted_Connection=True;" ;
+    public static string ConnectionString = "Data Source=FREEPDB1;Initial Catalog=MES;User id=dbo;Password=Duksu123!;";
 
     public static void AddOpenApiServices(this IServiceCollection services)
     {
