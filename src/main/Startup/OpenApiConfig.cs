@@ -5,11 +5,34 @@ using Scalar.AspNetCore;
 using System.Data.SqlClient;
 using System.Text;
 
+/*
+//AWS
+using Amazon.S3;
+using Amazon.S3.Model;
+using System.Threading.Tasks;
+//IAmazonS3 s3Client = new AmazonS3Client(); // Uses default credential chain
+// Or with specific credentials:
+IAmazonS3 s3Client = new AmazonS3Client(credentials);
+public class S3Example
+{
+    public async Task ListS3Buckets()
+    {
+        using (var client = new AmazonS3Client())
+        {
+            ListBucketsResponse response = await client.ListBucketsAsync();
+            foreach (var bucket in response.Buckets)
+            {
+                Console.WriteLine(bucket.BucketName);
+            }
+        }
+    }
+}
+*/
 public static class OpenAPIConfig
 {
 
     //connection string variable - did not decide where to put this
-    public static string ConnectionString = "Data Source=FREEPDB1;Initial Catalog=MES;User id=dbo;Password=Duksu123!;";
+    public static string ConnectionString = "Server=mes.cgv4qeum0qbf.us-east-1.rds.amazonaws.com,1433;Database=MES;Integrated Security = false;User ID=admin;Password=Duksu123!;";
 
     public static void AddOpenApiServices(this IServiceCollection services)
     {
@@ -264,11 +287,12 @@ public static class OpenAPIConfig
             }
         }
     }
-    
-    
+
+
 
 
 }
+
 
 
 /**

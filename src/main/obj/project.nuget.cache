@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "gjhXbOdsvzI=",
+  "dgSpecHash": "BITtyOde+oM=",
   "success": true,
   "projectFilePath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Jason Kim\\.nuget\\packages\\awssdk.core\\3.5.0\\awssdk.core.3.5.0.nupkg.sha512",
+    "C:\\Users\\Jason Kim\\.nuget\\packages\\awssdk.s3\\3.5.0\\awssdk.s3.3.5.0.nupkg.sha512",
     "C:\\Users\\Jason Kim\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
     "C:\\Users\\Jason Kim\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512",
     "C:\\Users\\Jason Kim\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
