@@ -4,7 +4,7 @@ using Scalar.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+//url is http://localhost:5100/scalar/v1
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.AddDependencies();

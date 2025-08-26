@@ -1,11 +1,11 @@
 namespace main.Startup;
 
-using Microsoft.VisualBasic;
+//using Microsoft.VisualBasic;
 using Scalar.AspNetCore;
 using System.Data.SqlClient;
 using System.Text;
 using System.Data;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
 /*
@@ -33,21 +33,19 @@ public class S3Example
 */
 public static class OpenAPIConfig
 {
-
     //connection string variable - did not decide where to put this
     public static string ConnectionString = "Server=mes.cgv4qeum0qbf.us-east-1.rds.amazonaws.com,1433;Database=MES;Integrated Security = false;User ID=admin;Password=Duksu123!;";
-
     public static void AddOpenApiServices(this IServiceCollection services)
     {
         services.AddOpenApi();
     }
-
     /**
     Name: SqlDataToJson()
     Summary: Function to convert an SqlDataReader datatype to a json string
     param: dataReader
     returns: JSONString
     **/
+    [Obsolete]
     public static String SqlDataToJson(SqlDataReader dataReader)
     {
         var dataTable = new DataTable();
@@ -73,7 +71,6 @@ public static class OpenAPIConfig
             ); //this is the scalar nuget add-on
         }
     }
-
     /**
     Name: DatabaseConnectionString()
     Summary: Database string to be used for sql
@@ -84,7 +81,6 @@ public static class OpenAPIConfig
     {
         return ConnectionString;
     }
-    
     /**
     Name: GetOrder()
     Summary: Get the mfg order information associated to a given mfg_order_nbr
@@ -131,7 +127,6 @@ public static class OpenAPIConfig
 
         return JsonResults;
     }
-
     /**
     Name: StartOrder()
     Summary: Start a new order; Initial order is made with only mfg_order_nbr, Product_Id, Product_Desc, Make_Qty
@@ -185,7 +180,6 @@ public static class OpenAPIConfig
             }
         }
     }
-
     /**
     Name: UpdateOrder()
     Summary: Update existing order; Identified based on Mfg_Order_Nbr (non-changable); can be used to update a completed order or move loads etc;
@@ -243,9 +237,6 @@ public static class OpenAPIConfig
             }
         }
     }
-
-    
-    
     /**
     Name: GetLoad()
     Summary: Get the load information associated to a given load ID
@@ -277,7 +268,6 @@ public static class OpenAPIConfig
 
         return JsonResults;
     }
-
     /**
     Name: StartLoad()
     Summary: Create new load; 
@@ -376,10 +366,6 @@ public static class OpenAPIConfig
             }
         }
     }
-
-
-
-
 }
 
 
