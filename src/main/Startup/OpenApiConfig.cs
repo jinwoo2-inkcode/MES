@@ -4,6 +4,9 @@ using Microsoft.VisualBasic;
 using Scalar.AspNetCore;
 using System.Data.SqlClient;
 using System.Text;
+using System.Data;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /*
 //AWS
@@ -39,7 +42,20 @@ public static class OpenAPIConfig
         services.AddOpenApi();
     }
 
-
+    /**
+    Name: SqlDataToJson()
+    Summary: Function to convert an SqlDataReader datatype to a json string
+    param: dataReader
+    returns: JSONString
+    **/
+    public static String SqlDataToJson(SqlDataReader dataReader)
+    {
+        var dataTable = new DataTable();
+        dataTable.Load(dataReader);
+        string JSONString = string.Empty;
+        JSONString = JsonConvert.SerializeObject(dataTable);
+        return JSONString;
+    }
     public static void UseOpenApi(this WebApplication app)
     {
         // Configure the HTTP request pipeline.
@@ -68,17 +84,52 @@ public static class OpenAPIConfig
     {
         return ConnectionString;
     }
-
+    
     /**
-    Name: StartOrder()
-    Summary: 
-    param:
-    returns: 
+    Name: GetOrder()
+    Summary: Get the mfg order information associated to a given mfg_order_nbr
+    param: MO_Order
+    returns: JsonResults
     **/
-    public static string[] Get()
+    [Obsolete]
+    public static string GetOrder(string MO_Order)
     {
-        string[] arr = ["", ""];
-        return arr;
+        StringBuilder sql = new StringBuilder();
+        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        cnn.Open();
+        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+
+        string JsonResults = "";
+
+        sql.Append("SELECT * FROM MES_ORDER");
+        sql.Append($" WHERE MFG_ORDER_NBR = {MO_Order}");
+
+        using (SqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+
+                JsonResults = SqlDataToJson(reader);
+                /*
+                // Access data by column name or index
+                string P_ID = reader["PRODUCT_ID"].ToString();
+                string P_Desc = reader["PRODUCT_DESC"].ToString();
+                string DO_Nbr = reader["DEMAND_ORD_NBR"].ToString() ?? "";
+                string ShipLoc = reader["SHIPPING_LOC"].ToString();
+                string MO_NBR = reader["MFG_ORDER_NBR"].ToString();
+                int make = Convert.ToInt32(reader["MAKE_QTY"]);
+                int made = Convert.ToInt32(reader["MADE_QTY"]);
+                DateTime due = Convert.ToDateTime(reader["DUE_DATE"]);
+                DateTime start_d = Convert.ToDateTime(reader["START_DATE"]);
+                DateTime end_d = Convert.ToDateTime(reader["END_DATE"]);
+                // Process the retrieved data
+                */
+            }
+            
+        }
+        cnn.Close();
+
+        return JsonResults;
     }
 
     /**
@@ -87,6 +138,7 @@ public static class OpenAPIConfig
     param: Product_Id,Product_Desc, Demand_Ord_Nbr, Make_Qty, Made_Qty, Due_Date,Start_Date, End_Date, Shipping_Loc, Mfg_Order_Nbr
     returns: null
     **/
+    [Obsolete]
     public static void StartOrder(string P_Id,
                                     string P_Desc,
                                     string DO_Nbr,
@@ -129,7 +181,7 @@ public static class OpenAPIConfig
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("ERROR:" + ex.Message);
+                Console.WriteLine("ERROR:" + ex.Message);
             }
         }
     }
@@ -140,6 +192,7 @@ public static class OpenAPIConfig
     param: Product_Id,Product_Desc, Demand_Ord_Nbr, Make_Qty, Made_Qty, Due_Date,Start_Date, End_Date, Shipping_Loc, Mfg_Order_Nbr
     returns: null
     **/
+    [Obsolete]
     public static void UpdateOrder(string P_Id,
                                     string P_Desc,
                                     string DO_Nbr,
@@ -186,9 +239,43 @@ public static class OpenAPIConfig
             {
                 // We should log the error somewhere, 
                 // for this example let's just show a message
-                //MessageBox.Show("ERROR:" + ex.Message);
+                Console.WriteLine("ERROR:" + ex.Message);
             }
         }
+    }
+
+    
+    
+    /**
+    Name: GetLoad()
+    Summary: Get the load information associated to a given load ID
+    param: L_ID
+    returns: JsonResults
+    **/
+    [Obsolete]
+    public static string GetLoad(string L_ID)
+    {
+        StringBuilder sql = new StringBuilder();
+        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        cnn.Open();
+        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+
+        string JsonResults = "";
+
+        sql.Append("SELECT * FROM MES_LOAD");
+        sql.Append($" WHERE LOAD_ID = {L_ID}");
+
+        using (SqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                JsonResults = SqlDataToJson(reader);
+            }
+            
+        }
+        cnn.Close();
+
+        return JsonResults;
     }
 
     /**
@@ -197,6 +284,7 @@ public static class OpenAPIConfig
     param: Product_Id,Product_Desc, Demand_Ord_Nbr, Load_Qty, Create_Date, Load_Id, active
     returns: null
     **/
+    [Obsolete]
     public static void StartLoad(string P_Id,
                                 string P_Desc,
                                 string DO_Nbr,
@@ -234,7 +322,7 @@ public static class OpenAPIConfig
             {
                 // We should log the error somewhere, 
                 // for this example let's just show a message
-                //MessageBox.Show("ERROR:" + ex.Message);
+                Console.WriteLine("ERROR:" + ex.Message);
             }
         }
     }
@@ -245,6 +333,7 @@ public static class OpenAPIConfig
     param: Product_Id,Product_Desc, Demand_Ord_Nbr, Load_Qty, Create_Date, Load_Id, active
     returns: null
     **/
+    [Obsolete]
     public static void UpdateLoad(string P_Id,
                                 string P_Desc,
                                 string DO_Nbr,
@@ -283,7 +372,7 @@ public static class OpenAPIConfig
             {
                 // We should log the error somewhere, 
                 // for this example let's just show a message
-                //MessageBox.Show("ERROR:" + ex.Message);
+                Console.WriteLine("ERROR:" + ex.Message);
             }
         }
     }
