@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Database",
-    "\\src",
-    "\\src\\main"
+    ""
   ],
-  "SelectedNode": "\\src\\main\\appsettings.Development.json",
+  "SelectedNode": "\\main.sln",
   "PreviewInSolutionExplorer": false
 }
