@@ -6,4 +6,6 @@ public static class RootEndPoints
     {
         app.MapGet("/", () => "hello World");
     }
+
+    
 }
