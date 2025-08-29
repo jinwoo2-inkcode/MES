@@ -42,3 +42,4 @@ C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-x
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-x86\native\sni.dll
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+C:\Users\Jason Kim\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

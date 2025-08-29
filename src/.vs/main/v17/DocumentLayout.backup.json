@@ -46,7 +46,8 @@
               "RelativeToolTip": "main\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T20:02:45.827Z"
+              "WhenOpened": "2025-08-29T20:02:45.827Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -58,7 +59,8 @@
               "RelativeToolTip": "main\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-29T19:28:56.276Z"
+              "WhenOpened": "2025-08-29T19:28:56.276Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -70,7 +72,8 @@
               "RelativeToolTip": "main\\Endpoints\\RootEndPoints.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T17:13:56.223Z"
+              "WhenOpened": "2025-08-29T17:13:56.223Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,7 +83,7 @@
               "RelativeDocumentMoniker": "main\\Endpoints\\MainEndPoints.cs",
               "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Endpoints\\MainEndPoints.cs",
               "RelativeToolTip": "main\\Endpoints\\MainEndPoints.cs",
-              "ViewState": "AgIAAHYBAAAAAAAAAAAUwIABAABRAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAUwH8BAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-29T00:50:10.461Z",
               "EditorCaption": ""
@@ -95,7 +98,8 @@
               "RelativeToolTip": "main\\Startup\\OpenApiConfig.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T19:28:49.224Z"
+              "WhenOpened": "2025-08-29T19:28:49.224Z",
+              "EditorCaption": ""
             }
           ]
         }

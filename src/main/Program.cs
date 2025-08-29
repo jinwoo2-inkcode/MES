@@ -16,10 +16,14 @@ app.UseOpenApi();
 app.UseHttpsRedirection();
 
 app.AddRootEndPoints();
+app.AddLoadEndpoints();
+app.AddOrderEndpoints();
+app.CheckConnection();
 
 app.Run();
 
 
+//this line is for testing if git push works
 
 /*
 // A skeleton of a C# program

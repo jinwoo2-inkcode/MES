@@ -33,13 +33,45 @@ public static class MainEndPoints
 {
     //connection string variable - did not decide where to put this
     public static string ConnectionString = "Server=mes.cgv4qeum0qbf.us-east-1.rds.amazonaws.com,1433;Database=MES;Integrated Security = false;User ID=admin;Password=Duksu123!;";
-    public static void AddCourseEndpoints(this WebApplication app)
+    public static void AddLoadEndpoints(this WebApplication app)
     {
-        app.MapGet("/load", LoadAllLoads);
-        app.MapGet("/load/{Load_ID}", LoadCourseById);
+        app.MapGet("/load", GetAllLoads);
+        app.MapGet("/load/{L_ID}", GetLoad);
+    }
+    public static void AddOrderEndpoints(this WebApplication app)
+    {
+        app.MapGet("/order", GetAllOrders);
+        app.MapGet("/order/{MO_Order}", GetOrder);
+    }
+    public static void CheckConnection(this WebApplication app)
+    {
+        app.MapGet("/connection", IsConnectionStringSyntacticallyValid);
     }
 
-    private static IResult LoadAllLoads(
+    public static bool IsConnectionStringSyntacticallyValid()
+    {
+        if (string.IsNullOrWhiteSpace(ConnectionString))
+        {
+            return false; // Or throw ArgumentException
+        }
+
+        try
+        {
+            var builder = new SqlConnectionStringBuilder(ConnectionString);
+
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            // Log or handle the exception (e.g., KeyNotFoundException, FormatException, ArgumentException)
+            Console.WriteLine($"Connection string format error: {ex.Message}");
+            return false;
+        }
+    }
+
+    /*
+    private static IResult GetAllLoads(
         Load_Data data,
         string? PRODUCT_ID,
         string? DEMAND_ORD_NBR,
@@ -68,8 +100,9 @@ public static class MainEndPoints
 
         return Results.Ok(output);
     }
+    */
 
-    private static IResult LoadCourseById(Load_Data data, string Load_ID)
+    private static IResult LoadByLoadId(Load_Data data, string Load_ID)
     {
         var output = data.LoadData.SingleOrDefault(x => x.LOAD_ID == Load_ID);
         if (output is null)
@@ -104,6 +137,42 @@ public static class MainEndPoints
     {
         return ConnectionString;
     }
+
+    /**
+    Name: GetOrder()
+    Summary: Get the mfg order information associated to a given mfg_order_nbr
+    param: MO_Order
+    returns: JsonResults
+    **/
+    [Obsolete]
+    public static string GetAllOrders(DateTime? start_datetime, DateTime? end_datetime)
+    {
+        DateTime e_d = end_datetime ?? DateTime.Now;
+        DateTime s_d = start_datetime ?? e_d.AddDays(-1);
+
+        StringBuilder sql = new StringBuilder();
+
+        string JsonResults = "";
+
+        sql.Append("SELECT * FROM MES_ORDER");
+        sql.Append($" WHERE START_DATE BETWEEN '{s_d}' AD '{e_d}'");
+
+        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        cnn.Open();
+        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+
+        using (SqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                JsonResults = SqlDataToJson(reader);
+            }
+
+        }
+        cnn.Close();
+
+        return JsonResults;
+    }
     /**
     Name: GetOrder()
     Summary: Get the mfg order information associated to a given mfg_order_nbr
@@ -114,14 +183,15 @@ public static class MainEndPoints
     public static string GetOrder(string MO_Order)
     {
         StringBuilder sql = new StringBuilder();
-        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
-        cnn.Open();
-        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
 
         string JsonResults = "";
 
         sql.Append("SELECT * FROM MES_ORDER");
-        sql.Append($" WHERE MFG_ORDER_NBR = {MO_Order}");
+        sql.Append($" WHERE MFG_ORDER_NBR = '{MO_Order}'");
+
+        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        cnn.Open();
+        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
 
         using (SqlDataReader reader = cmd.ExecuteReader())
         {
@@ -183,7 +253,7 @@ public static class MainEndPoints
         string MFG_ORDER_NBR = MO_Nbr;
 
         sql.Append("INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, MAKE_QTY, MADE_QTY, DUE_DATE, START_DATE, END_DATE, SHIPPING_LOC, MFG_ORDER_NBR)");
-        sql.Append($" VALUES ({PRODUCT_ID}, {PRODUCT_DESC}, {DEMAND_ORD_NBR}, {MAKE_QTY}, {MADE_QTY}, {DUE_DATE}, {START_DATE}, {END_DATE}, {SHIPPING_LOC}, {MFG_ORDER_NBR})");
+        sql.Append($" VALUES ('{PRODUCT_ID}', '{PRODUCT_DESC}', '{DEMAND_ORD_NBR}', {MAKE_QTY}, {MADE_QTY}, '{DUE_DATE}', '{START_DATE}', '{END_DATE}', '{SHIPPING_LOC}', '{MFG_ORDER_NBR}')");
 
         using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
         {
@@ -236,8 +306,8 @@ public static class MainEndPoints
         string MFG_ORDER_NBR = MO_Nbr;
 
         sql.Append("UPDATE dbo.MES_ORDER");
-        sql.Append($" SET PRODUCT_ID={PRODUCT_ID}, PRODUCT_DESC={PRODUCT_DESC}, DEMAND_ORD_NBR={DEMAND_ORD_NBR}, MAKE_QTY={MAKE_QTY}, MADE_QTY={MADE_QTY}, DUE_DATE={DUE_DATE}, START_DATE={START_DATE}, END_DATE={END_DATE}, SHIPPING_LOC={SHIPPING_LOC}");
-        sql.Append($" WHERE MFG_ORDER_NBR = {MFG_ORDER_NBR}");
+        sql.Append($" SET PRODUCT_ID='{PRODUCT_ID}', PRODUCT_DESC='{PRODUCT_DESC}', DEMAND_ORD_NBR='{DEMAND_ORD_NBR}', MAKE_QTY={MAKE_QTY}, MADE_QTY={MADE_QTY}, DUE_DATE='{DUE_DATE}', START_DATE='{START_DATE}', END_DATE='{END_DATE}', SHIPPING_LOC='{SHIPPING_LOC}'");
+        sql.Append($" WHERE MFG_ORDER_NBR = '{MFG_ORDER_NBR}'");
 
 
         using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
@@ -261,23 +331,28 @@ public static class MainEndPoints
         }
     }
     /**
-    Name: GetLoad()
-    Summary: Get the load information associated to a given load ID
-    param: L_ID
+    Name: GetAllLoad()
+    Summary: Get all load information associated to a given time frame
+    param: start_datetime, end_datetime
     returns: JsonResults
     **/
     [Obsolete]
-    public static string GetLoad(string L_ID)
+    public static string GetAllLoads(DateTime? start_datetime, DateTime? end_datetime)
     {
+        DateTime e_d = end_datetime ?? DateTime.Now;
+        DateTime s_d = start_datetime ?? e_d.AddDays(-1);
+        
         StringBuilder sql = new StringBuilder();
-        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
-        cnn.Open();
-        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+        
 
         string JsonResults = "";
 
         sql.Append("SELECT * FROM MES_LOAD");
-        sql.Append($" WHERE LOAD_ID = {L_ID}");
+        sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
+
+        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        cnn.Open();
+        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
 
         using (SqlDataReader reader = cmd.ExecuteReader())
         {
@@ -289,6 +364,39 @@ public static class MainEndPoints
         }
         cnn.Close();
 
+        return JsonResults;
+    }
+    /**
+    Name: GetLoad()
+    Summary: Get the load information associated to a given load ID
+    param: L_ID
+    returns: JsonResults
+    **/
+    [Obsolete]
+    public static string GetLoad(string L_ID)
+    {
+        StringBuilder sql = new StringBuilder();
+
+
+        string JsonResults = "";
+
+        sql.Append("SELECT * FROM MES_LOAD");
+        sql.Append($" WHERE LOAD_ID = '{L_ID}'");
+        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
+        {
+            cnn.Open();
+            using (SqlCommand cmd = new SqlCommand(sql.ToString(), cnn))
+            { 
+                
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    JsonResults = SqlDataToJson(reader);
+                }
+            }
+            cnn.Close();
+        }
         return JsonResults;
     }
     /**
@@ -317,7 +425,7 @@ public static class MainEndPoints
         int ACTIVE = active;
 
         sql.Append("INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE)");
-        sql.Append($" VALUES ({PRODUCT_ID}, {PRODUCT_DESC}, {DEMAND_ORD_NBR}, {LOAD_QTY}, {CREATE_DATETIME}, {LOAD_ID}, {ACTIVE})");
+        sql.Append($" VALUES ('{PRODUCT_ID}', '{PRODUCT_DESC}', '{DEMAND_ORD_NBR}', '{LOAD_QTY}', '{CREATE_DATETIME}', '{LOAD_ID}', '{ACTIVE}')");
 
         using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
         {
@@ -366,8 +474,8 @@ public static class MainEndPoints
         int ACTIVE = active;
 
         sql.Append("UPDATE dbo.MES_LOAD");
-        sql.Append($" SET PRODUCT_ID={PRODUCT_ID}, PRODUCT_DESC={PRODUCT_DESC}, DEMAND_ORD_NBR={DEMAND_ORD_NBR}, CREATE_DATETIME={CREATE_DATETIME}, LOAD_QTY={LOAD_QTY}, ACTIVE={ACTIVE}");
-        sql.Append($" WHERE LOAD_ID = {LOAD_ID}");
+        sql.Append($" SET PRODUCT_ID='{PRODUCT_ID}', PRODUCT_DESC='{PRODUCT_DESC}', DEMAND_ORD_NBR='{DEMAND_ORD_NBR}', CREATE_DATETIME='{CREATE_DATETIME}', LOAD_QTY={LOAD_QTY}, ACTIVE={ACTIVE}");
+        sql.Append($" WHERE LOAD_ID = '{LOAD_ID}'");
 
         using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
         {
