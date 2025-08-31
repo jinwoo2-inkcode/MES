@@ -43,3 +43,47 @@ C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-x
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
 C:\Users\Jason Kim\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\appsettings.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\Data\Data.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.staticwebassets.endpoints.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.exe
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.deps.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.runtimeconfig.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\main.pdb
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\AWSSDK.Core.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\AWSSDK.S3.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\Scalar.AspNetCore.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\System.Data.SqlClient.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-arm64\native\sni.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-x64\native\sni.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win-x86\native\sni.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\bin\Debug\net9.0\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.csproj.AssemblyReference.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.AssemblyInfoInputs.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.AssemblyInfo.cs
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.csproj.CoreCompileInputs.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.sourcelink.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\scopedcss\bundle\main.styles.css
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.csproj.Up2Date
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\refint\main.dll
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.pdb
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.genruntimeconfig.cache
+C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\ref\main.dll

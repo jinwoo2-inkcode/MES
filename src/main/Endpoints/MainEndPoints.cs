@@ -155,7 +155,7 @@ public static class MainEndPoints
         string JsonResults = "";
 
         sql.Append("SELECT * FROM MES_ORDER");
-        sql.Append($" WHERE START_DATE BETWEEN '{s_d}' AD '{e_d}'");
+        sql.Append($" WHERE START_DATE BETWEEN '{s_d}' AND '{e_d}'");
 
         SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
         cnn.Open();
@@ -330,41 +330,69 @@ public static class MainEndPoints
             }
         }
     }
+
+    // [Obsolete]
+    // public static string GetAllLoads(DateTime? start_datetime, DateTime? end_datetime)
+    // {
+    //     DateTime e_d = end_datetime ?? DateTime.Now;
+    //     DateTime s_d = start_datetime ?? e_d.AddDays(-1);
+
+    //     StringBuilder sql = new StringBuilder();
+
+
+    //     string JsonResults = "";
+
+    //     sql.Append("SELECT * FROM MES_LOAD");
+    //     sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
+
+    //     SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+    //     cnn.Open();
+    //     SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+
+    //     using (SqlDataReader reader = cmd.ExecuteReader())
+    //     {
+    //         while (reader.Read())
+    //         {
+    //             JsonResults = SqlDataToJson(reader);
+    //         }
+
+    //     }
+    //     cnn.Close();
+
+    //     return JsonResults;
+    // }
+
     /**
     Name: GetAllLoad()
     Summary: Get all load information associated to a given time frame
     param: start_datetime, end_datetime
     returns: JsonResults
     **/
+
+    // Fix : replaced string-concatenated DateTime literals with typed SQL parameters
     [Obsolete]
     public static string GetAllLoads(DateTime? start_datetime, DateTime? end_datetime)
     {
         DateTime e_d = end_datetime ?? DateTime.Now;
         DateTime s_d = start_datetime ?? e_d.AddDays(-1);
-        
-        StringBuilder sql = new StringBuilder();
-        
 
-        string JsonResults = "";
+        const string sql = @"
+            SELECT * 
+            FROM MES_LOAD
+            WHERE CREATE_DATETIME BETWEEN @s AND @e";
 
-        sql.Append("SELECT * FROM MES_LOAD");
-        sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@s", SqlDbType.DateTime2).Value = s_d;
+        cmd.Parameters.Add("@e", SqlDbType.DateTime2).Value = e_d;
 
-        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
         cnn.Open();
-        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+        using var reader = cmd.ExecuteReader();
 
-        using (SqlDataReader reader = cmd.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                JsonResults = SqlDataToJson(reader);
-            }
-
-        }
-        cnn.Close();
-
-        return JsonResults;
+        // load all rows at once, no while(reader.Read()) loop
+        var dt = new DataTable();
+        dt.Load(reader);
+        return JsonConvert.SerializeObject(dt);
     }
     /**
     Name: GetLoad()
