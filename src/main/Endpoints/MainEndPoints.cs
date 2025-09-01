@@ -36,18 +36,23 @@ public static class MainEndPoints
     public static void AddLoadEndpoints(this WebApplication app)
     {
         app.MapGet("/load", GetAllLoads);
-        app.MapGet("/load/{L_ID}", GetLoad);
+        app.MapGet("/load/{LOAD_ID}", GetLoad);
+        app.MapGet("/load/StartLoad", StartLoad);
+        app.MapGet("/load/UpdateLoad", UpdateLoad);
     }
     public static void AddOrderEndpoints(this WebApplication app)
     {
         app.MapGet("/order", GetAllOrders);
-        app.MapGet("/order/{MO_Order}", GetOrder);
+        app.MapGet("/order/{MFG_ORDER_NBR}", GetOrder);
+        app.MapGet("/load/StartOrder", StartOrder);
+        app.MapGet("/load/UpdateOrder", UpdateOrder);
     }
+    
     public static void CheckConnection(this WebApplication app)
     {
         app.MapGet("/connection", IsConnectionStringSyntacticallyValid);
     }
-
+    [Obsolete]
     public static bool IsConnectionStringSyntacticallyValid()
     {
         if (string.IsNullOrWhiteSpace(ConnectionString))
@@ -68,47 +73,6 @@ public static class MainEndPoints
             Console.WriteLine($"Connection string format error: {ex.Message}");
             return false;
         }
-    }
-
-    /*
-    private static IResult GetAllLoads(
-        Load_Data data,
-        string? PRODUCT_ID,
-        string? DEMAND_ORD_NBR,
-        string? Load_ID,
-        double? Load_Qty,
-        DateTime? Create_Datetime,
-        int? active
-        )
-    {
-        var output = data.LoadData;
-        if (!string.IsNullOrWhiteSpace(PRODUCT_ID))
-        {
-            output.RemoveAll(x => string.Compare(
-                x.PRODUCT_ID,
-                PRODUCT_ID,
-                StringComparison.OrdinalIgnoreCase) != 0);
-        }
-        if (!string.IsNullOrWhiteSpace(DEMAND_ORD_NBR))
-        {
-            output.RemoveAll(x => string.Compare(
-                x.DEMAND_ORD_NBR,
-                DEMAND_ORD_NBR,
-                StringComparison.OrdinalIgnoreCase) != 0);
-        }
-
-
-        return Results.Ok(output);
-    }
-    */
-
-    private static IResult LoadByLoadId(Load_Data data, string Load_ID)
-    {
-        var output = data.LoadData.SingleOrDefault(x => x.LOAD_ID == Load_ID);
-        if (output is null)
-            return Results.NotFound();
-
-        return Results.Ok(output);
     }
 
     /**
@@ -141,7 +105,7 @@ public static class MainEndPoints
     /**
     Name: GetOrder()
     Summary: Get the mfg order information associated to a given mfg_order_nbr
-    param: MO_Order
+    param: start_datetime, end_datetime
     returns: JsonResults
     **/
     [Obsolete]
@@ -150,28 +114,23 @@ public static class MainEndPoints
         DateTime e_d = end_datetime ?? DateTime.Now;
         DateTime s_d = start_datetime ?? e_d.AddDays(-1);
 
-        StringBuilder sql = new StringBuilder();
+        const string sql = @"
+            SELECT * 
+            FROM MES_ORDER
+            WHERE CREATE_DATETIME BETWEEN @s AND @e";
 
-        string JsonResults = "";
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@s", SqlDbType.DateTime2).Value = s_d;
+        cmd.Parameters.Add("@e", SqlDbType.DateTime2).Value = e_d;
 
-        sql.Append("SELECT * FROM MES_ORDER");
-        sql.Append($" WHERE START_DATE BETWEEN '{s_d}' AND '{e_d}'");
-
-        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
         cnn.Open();
-        SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+        using var reader = cmd.ExecuteReader();
 
-        using (SqlDataReader reader = cmd.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                JsonResults = SqlDataToJson(reader);
-            }
-
-        }
-        cnn.Close();
-
-        return JsonResults;
+        // load all rows at once, no while(reader.Read()) loop
+        var dt = new DataTable();
+        dt.Load(reader);
+        return JsonConvert.SerializeObject(dt);
     }
     /**
     Name: GetOrder()
@@ -180,8 +139,25 @@ public static class MainEndPoints
     returns: JsonResults
     **/
     [Obsolete]
-    public static string GetOrder(string MO_Order)
+    public static string GetOrder(string MFG_ORDER_NBR)
     {
+        const string sql = @"
+            SELECT * 
+            FROM MES_ORDER
+            WHERE MFG_ORDER_NBR = @MFG_ORDER_NBR";
+
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@MFG_ORDER_NBR", SqlDbType.VarChar).Value = MFG_ORDER_NBR;
+
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
+
+        // load all rows at once, no while(reader.Read()) loop
+        var dt = new DataTable();
+        dt.Load(reader);
+        return JsonConvert.SerializeObject(dt);
+        /*
         StringBuilder sql = new StringBuilder();
 
         string JsonResults = "";
@@ -199,7 +175,7 @@ public static class MainEndPoints
             {
 
                 JsonResults = SqlDataToJson(reader);
-                /*
+                
                 // Access data by column name or index
                 string P_ID = reader["PRODUCT_ID"].ToString();
                 string P_Desc = reader["PRODUCT_DESC"].ToString();
@@ -212,13 +188,14 @@ public static class MainEndPoints
                 DateTime start_d = Convert.ToDateTime(reader["START_DATE"]);
                 DateTime end_d = Convert.ToDateTime(reader["END_DATE"]);
                 // Process the retrieved data
-                */
+                
             }
 
         }
         cnn.Close();
 
         return JsonResults;
+        */
     }
     /**
     Name: StartOrder()
@@ -227,51 +204,34 @@ public static class MainEndPoints
     returns: null
     **/
     [Obsolete]
-    public static void StartOrder(string P_Id,
-                                    string P_Desc,
-                                    string DO_Nbr,
-                                    double make,
-                                    double made,
-                                    DateTime DueDate,
-                                    DateTime StartDate,
-                                    DateTime EndDate,
-                                    string ShipLoc,
-                                    string MO_Nbr)
+    public static void StartOrder(string PRODUCT_ID,
+                                    string PRODUCT_DESC,
+                                    string DEMAND_ORD_NBR,
+                                    double MAKE_QTY,
+                                    double MADE_QTY, //usually 0
+                                    string DUE_DATE,
+                                    //string? END_DATE,//usually null
+                                    string SHIPPING_LOC,
+                                    string MFG_ORDER_NBR)
     {
+        const string sql = @"
+            INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, MAKE_QTY, MADE_QTY, DUE_DATE, START_DATE, END_DATE, SHIPPING_LOC, MFG_ORDER_NBR)
+            VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @MAKE_QTY, @MADE_QTY, @DUE_DATE, GETDATE(), null, @SHIPPING_LOC, @MFG_ORDER_NBR)";
 
-        StringBuilder sql = new StringBuilder();
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.VarChar).Value = PRODUCT_ID;
+        cmd.Parameters.Add("@PRODUCT_DESC", SqlDbType.VarChar).Value = PRODUCT_DESC;
+        cmd.Parameters.Add("@DEMAND_ORD_NBR", SqlDbType.VarChar).Value = DEMAND_ORD_NBR;
+        cmd.Parameters.Add("@MAKE_QTY", SqlDbType.Int).Value = MAKE_QTY;
+        cmd.Parameters.Add("@MADE_QTY", SqlDbType.Int).Value = MADE_QTY;
+        cmd.Parameters.Add("@DUE_DATE", SqlDbType.VarChar).Value = DUE_DATE;
+        //cmd.Parameters.Add("@END_DATE", SqlDbType.VarChar).Value = END_DATE ?? null";
+        cmd.Parameters.Add("@SHIPPING_LOC", SqlDbType.VarChar).Value = SHIPPING_LOC;
+        cmd.Parameters.Add("@MFG_ORDER_NBR", SqlDbType.VarChar).Value = MFG_ORDER_NBR;
 
-        string PRODUCT_ID = P_Id;
-        string PRODUCT_DESC = P_Desc;
-        string DEMAND_ORD_NBR = DO_Nbr;
-        double MAKE_QTY = make;
-        double MADE_QTY = made; //usually 0
-        DateTime DUE_DATE = DueDate;
-        DateTime START_DATE = StartDate; //usually null
-        DateTime END_DATE = EndDate; //usually null
-        string SHIPPING_LOC = ShipLoc;
-        string MFG_ORDER_NBR = MO_Nbr;
-
-        sql.Append("INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, MAKE_QTY, MADE_QTY, DUE_DATE, START_DATE, END_DATE, SHIPPING_LOC, MFG_ORDER_NBR)");
-        sql.Append($" VALUES ('{PRODUCT_ID}', '{PRODUCT_DESC}', '{DEMAND_ORD_NBR}', {MAKE_QTY}, {MADE_QTY}, '{DUE_DATE}', '{START_DATE}', '{END_DATE}', '{SHIPPING_LOC}', '{MFG_ORDER_NBR}')");
-
-        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
-        {
-            try
-            {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql.ToString(), cnn))
-                {
-                    cmd.ExecuteNonQuery();
-
-                }
-                cnn.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("ERROR:" + ex.Message);
-            }
-        }
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
     }
     /**
     Name: UpdateOrder()
@@ -280,86 +240,57 @@ public static class MainEndPoints
     returns: null
     **/
     [Obsolete]
-    public static void UpdateOrder(string P_Id,
-                                    string P_Desc,
-                                    string DO_Nbr,
-                                    double make,
-                                    double made,
-                                    DateTime DueDate,
-                                    DateTime StartDate,
-                                    DateTime EndDate,
-                                    string ShipLoc,
-                                    string MO_Nbr)
+    public static void UpdateOrder(string? PRODUCT_ID,
+                                    string? PRODUCT_DESC,
+                                    string? DEMAND_ORD_NBR,
+                                    double? MAKE_QTY,
+                                    double? MADE_QTY,
+                                    DateTime? DUE_DATE,
+                                    DateTime? START_DATE,
+                                    DateTime? END_DATE,
+                                    string? SHIPPING_LOC,
+                                    string MFG_ORDER_NBR)
     {
 
-        StringBuilder sql = new StringBuilder();
+        string sql = @"
+            UPDATE dbo.MES_ORDER
+             SET ";
+        if (PRODUCT_ID != null)
+            sql += "PRODUCT_ID ='" + PRODUCT_ID + "',";
+        if (PRODUCT_DESC != null)
+            sql += "PRODUCT_DESC ='" + PRODUCT_DESC + "',";
+        if (DEMAND_ORD_NBR != null)
+            sql += "DEMAND_ORD_NBR ='" + DEMAND_ORD_NBR + "',";
+        if (MAKE_QTY != null)
+            sql += "MAKE_QTY = " + MAKE_QTY + ",";
+        if (MADE_QTY != null)
+            sql += "MADE_QTY = " + MADE_QTY + ",";
+        if (DUE_DATE != null)
+            sql += "DUE_DATE = " + DUE_DATE + ",";
+        if (START_DATE != null)
+            sql += "START_DATE = " + START_DATE + ",";
+        if (END_DATE != null)
+            sql += "END_DATE = " + END_DATE + ",";
+        if (SHIPPING_LOC != null)
+            sql += "SHIPPING_LOC = " + SHIPPING_LOC + ",";
+        if (MFG_ORDER_NBR != null)
+            sql += "MFG_ORDER_NBR = " + MFG_ORDER_NBR + ",";
 
-        string PRODUCT_ID = P_Id;
-        string PRODUCT_DESC = P_Desc;
-        string DEMAND_ORD_NBR = DO_Nbr;
-        double MAKE_QTY = make;
-        double MADE_QTY = made;
-        DateTime DUE_DATE = DueDate;
-        DateTime START_DATE = StartDate;
-        DateTime END_DATE = EndDate;
-        string SHIPPING_LOC = ShipLoc;
-        string MFG_ORDER_NBR = MO_Nbr;
+        sql = sql.Remove(sql.Length - 1) + "  WHERE MFG_ORDER_NBR = '" + MFG_ORDER_NBR + "'";
+        
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
+        
 
-        sql.Append("UPDATE dbo.MES_ORDER");
-        sql.Append($" SET PRODUCT_ID='{PRODUCT_ID}', PRODUCT_DESC='{PRODUCT_DESC}', DEMAND_ORD_NBR='{DEMAND_ORD_NBR}', MAKE_QTY={MAKE_QTY}, MADE_QTY={MADE_QTY}, DUE_DATE='{DUE_DATE}', START_DATE='{START_DATE}', END_DATE='{END_DATE}', SHIPPING_LOC='{SHIPPING_LOC}'");
-        sql.Append($" WHERE MFG_ORDER_NBR = '{MFG_ORDER_NBR}'");
-
-
-        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
-        {
-            try
-            {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql.ToString(), cnn))
-                {
-                    cmd.ExecuteNonQuery();
-
-                }
-                cnn.Close();
-            }
-            catch (Exception ex)
-            {
-                // We should log the error somewhere, 
-                // for this example let's just show a message
-                Console.WriteLine("ERROR:" + ex.Message);
-            }
-        }
     }
 
     // [Obsolete]
     // public static string GetAllLoads(DateTime? start_datetime, DateTime? end_datetime)
     // {
-    //     DateTime e_d = end_datetime ?? DateTime.Now;
-    //     DateTime s_d = start_datetime ?? e_d.AddDays(-1);
-
-    //     StringBuilder sql = new StringBuilder();
-
-
-    //     string JsonResults = "";
-
-    //     sql.Append("SELECT * FROM MES_LOAD");
-    //     sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
-
-    //     SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
-    //     cnn.Open();
-    //     SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
-
-    //     using (SqlDataReader reader = cmd.ExecuteReader())
-    //     {
-    //         while (reader.Read())
-    //         {
-    //             JsonResults = SqlDataToJson(reader);
-    //         }
-
-    //     }
-    //     cnn.Close();
-
-    //     return JsonResults;
+    //     
     // }
 
     /**
@@ -393,6 +324,32 @@ public static class MainEndPoints
         var dt = new DataTable();
         dt.Load(reader);
         return JsonConvert.SerializeObject(dt);
+    //     DateTime e_d = end_datetime ?? DateTime.Now;
+    //     DateTime s_d = start_datetime ?? e_d.AddDays(-1);
+
+    //     StringBuilder sql = new StringBuilder();
+
+
+    //     string JsonResults = "";
+
+    //     sql.Append("SELECT * FROM MES_LOAD");
+    //     sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
+
+    //     SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+    //     cnn.Open();
+    //     SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
+
+    //     using (SqlDataReader reader = cmd.ExecuteReader())
+    //     {
+    //         while (reader.Read())
+    //         {
+    //             JsonResults = SqlDataToJson(reader);
+    //         }
+
+    //     }
+    //     cnn.Close();
+
+    //     return JsonResults;
     }
     /**
     Name: GetLoad()
@@ -401,8 +358,25 @@ public static class MainEndPoints
     returns: JsonResults
     **/
     [Obsolete]
-    public static string GetLoad(string L_ID)
+    public static string GetLoad(string Load_ID)
     {
+        const string sql = @"
+            SELECT * 
+            FROM MES_LOAD
+             WHERE LOAD_ID = @l";
+
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@l", SqlDbType.VarChar).Value = Load_ID;
+
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
+
+        // load all rows at once, no while(reader.Read()) loop
+        var dt = new DataTable();
+        dt.Load(reader);
+        return JsonConvert.SerializeObject(dt);
+        /*
         StringBuilder sql = new StringBuilder();
 
 
@@ -414,10 +388,10 @@ public static class MainEndPoints
         {
             cnn.Open();
             using (SqlCommand cmd = new SqlCommand(sql.ToString(), cnn))
-            { 
-                
+            {
+
                 SqlDataReader reader = cmd.ExecuteReader();
-                
+
                 while (reader.Read())
                 {
                     JsonResults = SqlDataToJson(reader);
@@ -426,6 +400,8 @@ public static class MainEndPoints
             cnn.Close();
         }
         return JsonResults;
+        */
+
     }
     /**
     Name: StartLoad()
@@ -434,14 +410,31 @@ public static class MainEndPoints
     returns: null
     **/
     [Obsolete]
-    public static void StartLoad(string P_Id,
-                                string P_Desc,
-                                string DO_Nbr,
-                                double L_Qty,
-                                DateTime C_Date,
-                                string L_Id,
-                                int active)
+    public static void StartLoad(string PRODUCT_ID,
+                                string PRODUCT_DESC,
+                                string DEMAND_ORD_NBR,
+                                double LOAD_QTY,
+                                //DateTime CREATE_DATETIME,
+                                string LOAD_ID,
+                                int ACTIVE)
     {
+        const string sql = @"
+            INSERT INTO dbo.MES_LOAD (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE) 
+            VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @LOAD_QTY, GETDATE(), @LOAD_ID, @ACTIVE)";
+
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.VarChar).Value = PRODUCT_ID;
+        cmd.Parameters.Add("@PRODUCT_DESC", SqlDbType.VarChar).Value = PRODUCT_DESC;
+        cmd.Parameters.Add("@DEMAND_ORD_NBR", SqlDbType.VarChar).Value = DEMAND_ORD_NBR;
+        cmd.Parameters.Add("@LOAD_QTY", SqlDbType.Int).Value = LOAD_QTY;
+        //cmd.Parameters.Add("@CREATE_DATETIME", SqlDbType.DateTime2).Value = CREATE_DATETIME;
+        cmd.Parameters.Add("@LOAD_ID", SqlDbType.VarChar).Value = LOAD_ID;
+        cmd.Parameters.Add("@ACTIVE", SqlDbType.SmallInt).Value = ACTIVE;
+
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
+        /*
         StringBuilder sql = new StringBuilder();
 
         string PRODUCT_ID = P_Id;
@@ -474,6 +467,9 @@ public static class MainEndPoints
                 Console.WriteLine("ERROR:" + ex.Message);
             }
         }
+        */
+
+
     }
 
     /**
@@ -483,14 +479,37 @@ public static class MainEndPoints
     returns: null
     **/
     [Obsolete]
-    public static void UpdateLoad(string P_Id,
-                                string P_Desc,
-                                string DO_Nbr,
-                                double L_Qty,
-                                DateTime C_Date,
-                                string L_Id,
-                                int active)
+    public static void UpdateLoad(string? PRODUCT_ID,
+                                string? PRODUCT_DESC,
+                                string? DEMAND_ORD_NBR,
+                                double? LOAD_QTY,
+                                DateTime? CREATE_DATETIME,
+                                string LOAD_ID,
+                                int? ACTIVE)
     {
+        string sql = @"
+            UPDATE dbo.MES_LOAD
+             SET ";
+        if (PRODUCT_ID != null)
+            sql += "PRODUCT_ID ='" + PRODUCT_ID + "',";
+        if (PRODUCT_DESC != null)
+            sql += "PRODUCT_DESC ='" + PRODUCT_DESC + "',";
+        if (DEMAND_ORD_NBR != null)
+            sql += "DEMAND_ORD_NBR ='" + DEMAND_ORD_NBR + "',";
+        if (LOAD_QTY != null)
+            sql += "LOAD_QTY = " + LOAD_QTY + ",";
+        if (ACTIVE != null)
+            sql += "ACTIVE = " + ACTIVE + ",";
+
+        sql = sql.Remove(sql.Length - 1) + " WHERE LOAD_ID = '" + LOAD_ID + "'";
+        
+        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cmd = new SqlCommand(sql, cnn);
+        
+        cnn.Open();
+        using var reader = cmd.ExecuteReader();
+        
+        /*
         StringBuilder sql = new StringBuilder();
 
         string PRODUCT_ID = P_Id;
@@ -524,11 +543,12 @@ public static class MainEndPoints
                 Console.WriteLine("ERROR:" + ex.Message);
             }
         }
+        */
     }
 }
 
 
-
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /**
     Summary: 
     param:
