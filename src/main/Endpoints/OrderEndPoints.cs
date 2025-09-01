@@ -52,7 +52,7 @@ public static class OrderEndPoints
         const string sql = @"
             SELECT * 
             FROM MES_ORDER
-            WHERE CREATE_DATETIME BETWEEN @s AND @e";
+            WHERE START_DATE BETWEEN @s AND @e";
 
         using var cnn = new SqlConnection(DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
@@ -214,8 +214,6 @@ public static class OrderEndPoints
             sql += "END_DATE = " + END_DATE + ",";
         if (SHIPPING_LOC != null)
             sql += "SHIPPING_LOC = " + SHIPPING_LOC + ",";
-        if (MFG_ORDER_NBR != null)
-            sql += "MFG_ORDER_NBR = " + MFG_ORDER_NBR + ",";
 
         sql = sql.Remove(sql.Length - 1) + "  WHERE MFG_ORDER_NBR = '" + MFG_ORDER_NBR + "'";
         

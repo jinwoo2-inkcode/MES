@@ -81,11 +81,11 @@ public static class LoadEndPoints
     }
 
     /**
-Name: GetLoad()
-Summary: Get the load information associated to a given load ID
-param: L_ID
-returns: JsonResults
-**/
+    Name: GetLoad()
+    Summary: Get the load information associated to a given load ID
+    param: L_ID
+    returns: JsonResults
+    **/
     [Obsolete]
     public static string GetLoad(string Load_ID)
     {
