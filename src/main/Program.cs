@@ -1,6 +1,6 @@
 using main.Endpoints;
 using main.Startup;
-using Scalar.AspNetCore;
+//using Scalar.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
