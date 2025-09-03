@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {}
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj": {
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
-        "projectName": "main",
-        "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\main.csproj",
+        "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
+        "projectName": "MES_Interface",
+        "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
         "packagesPath": "C:\\Users\\Jason Kim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\obj\\",
+        "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,25 +50,26 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "AWSSDK.S3": {
-              "target": "Package",
-              "version": "[3.5.0, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
               "version": "[9.0.8, )"
             },
-            "Newtonsoft.Json": {
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[9.0.8, )"
             },
-            "Scalar.AspNetCore": {
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.6.9, )"
+              "version": "[9.0.8, )",
+              "autoReferenced": true
             },
-            "System.Data.SqlClient": {
+            "Microsoft.NET.Sdk.WebAssembly.Pack": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[4.9.0, )"
+              "version": "[9.0.8, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -82,15 +83,23 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[9.0.8, 9.0.8]"
+            }
+          ],
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
         }
       }
     }
