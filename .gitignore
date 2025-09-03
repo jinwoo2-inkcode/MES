@@ -8,4 +8,4 @@ src/.vscode/
 src/main/bin/
 src/main/appsettings.json
 src/main/obj/
-src/main/Endpoints/Funtinoal.cs
+src/main/Endpoints/Funtional.cs
