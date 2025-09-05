@@ -54,7 +54,7 @@ public static class OrderEndPoints
             FROM MES_ORDER
             WHERE START_DATE BETWEEN @s AND @e";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@s", SqlDbType.DateTime2).Value = s_d;
         cmd.Parameters.Add("@e", SqlDbType.DateTime2).Value = e_d;
@@ -66,11 +66,6 @@ public static class OrderEndPoints
         var dt = new DataTable();
         dt.Load(reader);
         return JsonConvert.SerializeObject(dt);
-    }
-
-    private static string DatabaseConnectionString()
-    {
-        throw new NotImplementedException();
     }
 
     /**
@@ -87,7 +82,7 @@ public static class OrderEndPoints
             FROM MES_ORDER
             WHERE MFG_ORDER_NBR = @MFG_ORDER_NBR";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@MFG_ORDER_NBR", SqlDbType.VarChar).Value = MFG_ORDER_NBR;
 
@@ -106,7 +101,7 @@ public static class OrderEndPoints
         sql.Append("SELECT * FROM MES_ORDER");
         sql.Append($" WHERE MFG_ORDER_NBR = '{MO_Order}'");
 
-        SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+        SqlConnection cnn = new SqlConnection(Functional.DatabaseConnectionString());
         cnn.Open();
         SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
 
@@ -159,7 +154,7 @@ public static class OrderEndPoints
             INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, MAKE_QTY, MADE_QTY, DUE_DATE, START_DATE, END_DATE, SHIPPING_LOC, MFG_ORDER_NBR)
             VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @MAKE_QTY, @MADE_QTY, @DUE_DATE, GETDATE(), null, @SHIPPING_LOC, @MFG_ORDER_NBR)";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.VarChar).Value = PRODUCT_ID;
         cmd.Parameters.Add("@PRODUCT_DESC", SqlDbType.VarChar).Value = PRODUCT_DESC;
@@ -217,7 +212,7 @@ public static class OrderEndPoints
 
         sql = sql.Remove(sql.Length - 1) + "  WHERE MFG_ORDER_NBR = '" + MFG_ORDER_NBR + "'";
         
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         
         cnn.Open();

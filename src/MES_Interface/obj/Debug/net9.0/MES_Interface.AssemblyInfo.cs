@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbec6152be4c7cd23e29dfbbf9089b4a850c4c3b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4ac6fdf2747ab64cc90cc1b9b32a53f295553eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

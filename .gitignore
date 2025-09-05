@@ -9,3 +9,4 @@ src/main/bin/
 src/main/appsettings.json
 src/main/obj/
 src/main/Endpoints/Funtional.cs
+.fake

@@ -35,7 +35,7 @@ public static class LoadEndPoints
             FROM MES_LOAD
             WHERE CREATE_DATETIME BETWEEN @s AND @e";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@s", SqlDbType.DateTime2).Value = s_d;
         cmd.Parameters.Add("@e", SqlDbType.DateTime2).Value = e_d;
@@ -58,7 +58,7 @@ public static class LoadEndPoints
     //     sql.Append("SELECT * FROM MES_LOAD");
     //     sql.Append($" WHERE CREATE_DATETIME BETWEEN '{s_d}' AND '{e_d}'");
 
-    //     SqlConnection cnn = new SqlConnection(DatabaseConnectionString());
+    //     SqlConnection cnn = new SqlConnection(Functional.DatabaseConnectionString());
     //     cnn.Open();
     //     SqlCommand cmd = new SqlCommand(sql.ToString(), cnn);
 
@@ -75,11 +75,6 @@ public static class LoadEndPoints
     //     return JsonResults;
     }
 
-    private static string DatabaseConnectionString()
-    {
-        throw new NotImplementedException();
-    }
-
     /**
     Name: GetLoad()
     Summary: Get the load information associated to a given load ID
@@ -94,7 +89,7 @@ public static class LoadEndPoints
             FROM MES_LOAD
              WHERE LOAD_ID = @l";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@l", SqlDbType.VarChar).Value = Load_ID;
 
@@ -113,7 +108,7 @@ public static class LoadEndPoints
 
         sql.Append("SELECT * FROM MES_LOAD");
         sql.Append($" WHERE LOAD_ID = '{L_ID}'");
-        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
+        using (SqlConnection cnn = new SqlConnection(Functional.DatabaseConnectionString()))
         {
             cnn.Open();
             using (SqlCommand cmd = new SqlCommand(sql.ToString(), cnn))
@@ -151,7 +146,7 @@ public static class LoadEndPoints
             INSERT INTO dbo.MES_LOAD (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE) 
             VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @LOAD_QTY, GETDATE(), @LOAD_ID, @ACTIVE)";
 
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.VarChar).Value = PRODUCT_ID;
         cmd.Parameters.Add("@PRODUCT_DESC", SqlDbType.VarChar).Value = PRODUCT_DESC;
@@ -177,7 +172,7 @@ public static class LoadEndPoints
         sql.Append("INSERT INTO dbo.MES_ORDER (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE)");
         sql.Append($" VALUES ('{PRODUCT_ID}', '{PRODUCT_DESC}', '{DEMAND_ORD_NBR}', '{LOAD_QTY}', '{CREATE_DATETIME}', '{LOAD_ID}', '{ACTIVE}')");
 
-        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
+        using (SqlConnection cnn = new SqlConnection(Functional.DatabaseConnectionString()))
         {
             try
             {
@@ -232,7 +227,7 @@ public static class LoadEndPoints
 
         sql = sql.Remove(sql.Length - 1) + " WHERE LOAD_ID = '" + LOAD_ID + "'";
         
-        using var cnn = new SqlConnection(DatabaseConnectionString());
+        using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         
         cnn.Open();
@@ -253,7 +248,7 @@ public static class LoadEndPoints
         sql.Append($" SET PRODUCT_ID='{PRODUCT_ID}', PRODUCT_DESC='{PRODUCT_DESC}', DEMAND_ORD_NBR='{DEMAND_ORD_NBR}', CREATE_DATETIME='{CREATE_DATETIME}', LOAD_QTY={LOAD_QTY}, ACTIVE={ACTIVE}");
         sql.Append($" WHERE LOAD_ID = '{LOAD_ID}'");
 
-        using (SqlConnection cnn = new SqlConnection(DatabaseConnectionString()))
+        using (SqlConnection cnn = new SqlConnection(Functional.DatabaseConnectionString()))
         {
             try
             {
