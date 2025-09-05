@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\peter\\OneDrive\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {}
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\peter\\OneDrive\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {
+    "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\peter\\OneDrive\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
+        "projectUniqueName": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
         "projectName": "MES_Interface",
-        "projectPath": "C:\\Users\\peter\\OneDrive\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
-        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\peter\\OneDrive\\Documents\\GitHub\\MES\\src\\MES_Interface\\obj\\",
+        "projectPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\MES_Interface.csproj",
+        "packagesPath": "C:\\Users\\Jason Kim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Jason Kim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

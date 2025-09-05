@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "main", "main\main.csproj", "{37497E3C-C045-4AD9-A5C6-49825061471E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MES_Interface", "MES_Interface\MES_Interface.csproj", "{08583B2C-4C69-4EC1-ACAD-397070B0EB13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{37497E3C-C045-4AD9-A5C6-49825061471E} = {37497E3C-C045-4AD9-A5C6-49825061471E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

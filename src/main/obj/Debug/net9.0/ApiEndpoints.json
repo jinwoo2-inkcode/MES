@@ -18,7 +18,7 @@
     ]
   },
   {
-    "ContainingType": "main.Endpoints.MainEndPoints",
+    "ContainingType": "main.Endpoints.Functional",
     "Method": "IsConnectionStringSyntacticallyValid",
     "RelativePath": "connection",
     "HttpMethod": "GET",
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "ContainingType": "main.Endpoints.MainEndPoints",
+    "ContainingType": "main.Endpoints.LoadEndPoints",
     "Method": "GetAllLoads",
     "RelativePath": "load",
     "HttpMethod": "GET",
@@ -65,15 +65,15 @@
     ]
   },
   {
-    "ContainingType": "main.Endpoints.MainEndPoints",
+    "ContainingType": "main.Endpoints.LoadEndPoints",
     "Method": "GetLoad",
-    "RelativePath": "load/{L_ID}",
+    "RelativePath": "load/{LOAD_ID}",
     "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "L_ID",
+        "Name": "LOAD_ID",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -89,7 +89,230 @@
     ]
   },
   {
-    "ContainingType": "main.Endpoints.MainEndPoints",
+    "ContainingType": "main.Endpoints.LoadEndPoints",
+    "Method": "StartLoad",
+    "RelativePath": "load/StartLoad",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PRODUCT_ID",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "PRODUCT_DESC",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "DEMAND_ORD_NBR",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "LOAD_QTY",
+        "Type": "System.Double",
+        "IsRequired": true
+      },
+      {
+        "Name": "LOAD_ID",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "ACTIVE",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "main.Endpoints.OrderEndPoints",
+    "Method": "StartOrder",
+    "RelativePath": "load/StartOrder",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PRODUCT_ID",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "PRODUCT_DESC",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "DEMAND_ORD_NBR",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "MAKE_QTY",
+        "Type": "System.Double",
+        "IsRequired": true
+      },
+      {
+        "Name": "MADE_QTY",
+        "Type": "System.Double",
+        "IsRequired": true
+      },
+      {
+        "Name": "DUE_DATE",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "SHIPPING_LOC",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "MFG_ORDER_NBR",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "main.Endpoints.LoadEndPoints",
+    "Method": "UpdateLoad",
+    "RelativePath": "load/UpdateLoad",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PRODUCT_ID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PRODUCT_DESC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DEMAND_ORD_NBR",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LOAD_QTY",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CREATE_DATETIME",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "LOAD_ID",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "ACTIVE",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "main.Endpoints.OrderEndPoints",
+    "Method": "UpdateOrder",
+    "RelativePath": "load/UpdateOrder",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PRODUCT_ID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PRODUCT_DESC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DEMAND_ORD_NBR",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MAKE_QTY",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "MADE_QTY",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DUE_DATE",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "START_DATE",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "END_DATE",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "SHIPPING_LOC",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MFG_ORDER_NBR",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "main.Endpoints.OrderEndPoints",
     "Method": "GetAllOrders",
     "RelativePath": "order",
     "HttpMethod": "GET",
@@ -118,15 +341,15 @@
     ]
   },
   {
-    "ContainingType": "main.Endpoints.MainEndPoints",
+    "ContainingType": "main.Endpoints.OrderEndPoints",
     "Method": "GetOrder",
-    "RelativePath": "order/{MO_Order}",
+    "RelativePath": "order/{MFG_ORDER_NBR}",
     "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "MO_Order",
+        "Name": "MFG_ORDER_NBR",
         "Type": "System.String",
         "IsRequired": true
       }

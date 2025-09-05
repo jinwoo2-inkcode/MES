@@ -1,28 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\main\\endpoints\\mainendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|solutionrelative:main\\endpoints\\mainendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\main\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|solutionrelative:main\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\main\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|solutionrelative:main\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\main\\startup\\openapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|solutionrelative:main\\startup\\openapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\main\\endpoints\\rootendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37497E3C-C045-4AD9-A5C6-49825061471E}|main\\main.csproj|solutionrelative:main\\endpoints\\rootendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -30,72 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Program.cs",
-              "RelativeDocumentMoniker": "main\\Program.cs",
-              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Program.cs",
-              "RelativeToolTip": "main\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T20:02:45.827Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "main\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Properties\\launchSettings.json",
-              "RelativeToolTip": "main\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-29T19:28:56.276Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RootEndPoints.cs",
-              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Endpoints\\RootEndPoints.cs",
-              "RelativeDocumentMoniker": "main\\Endpoints\\RootEndPoints.cs",
-              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Endpoints\\RootEndPoints.cs",
-              "RelativeToolTip": "main\\Endpoints\\RootEndPoints.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T17:13:56.223Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainEndPoints.cs",
-              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Endpoints\\MainEndPoints.cs",
-              "RelativeDocumentMoniker": "main\\Endpoints\\MainEndPoints.cs",
-              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Endpoints\\MainEndPoints.cs",
-              "RelativeToolTip": "main\\Endpoints\\MainEndPoints.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIABAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T00:50:10.461Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OpenApiConfig.cs",
-              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Startup\\OpenApiConfig.cs",
-              "RelativeDocumentMoniker": "main\\Startup\\OpenApiConfig.cs",
-              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\main\\Startup\\OpenApiConfig.cs",
-              "RelativeToolTip": "main\\Startup\\OpenApiConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T19:28:49.224Z"
             }
           ]
         }

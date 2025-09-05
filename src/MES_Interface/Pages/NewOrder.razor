@@ -1,0 +1,148 @@
+@page "/neworder"
+@*using MES_Interface.Models*@
+@inject HttpClient http
+
+@*This is where the NewOrder page is built
+need to be added:   add a list of orders
+                    
+*@
+
+
+<PageTitle>Home</PageTitle>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Input Boxes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="text"],
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    input[type="datetime-local"],
+    input[type="datetime-local"],
+    input[type="text"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Text Input Boxes</h1>
+
+  <div class="input-group">
+    <label for="name">Name:</label>
+    <input type="text" id="PRODUCT_ID" placeholder="Produce ID">
+  </div>
+
+  <div class="input-group">
+    <label for="email">Email:</label>
+    <input type="email" id="PRODUCT_DESC" placeholder="Product Description">
+  </div>
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="DEMAND_ORDER_NBR" placeholder="Demand Order Number">
+  </div>
+  
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="MAKE_QTY" placeholder="Make Quantity">
+  </div>
+  
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="DUE_DATE" placeholder="Due Date">
+  </div>
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="START_DATE" placeholder="START DATE">
+  </div>
+
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="END_DATE" placeholder="End Date">
+  </div>
+
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="SHIPPING_LOC" placeholder="SHIPPING LOCATION">
+  </div>
+
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="MFG_ORDER_NBR" placeholder="MFG ORDER NBR">
+  </div>
+
+  <div class="input-group">
+    <label for="message">Message:</label>
+    <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+  </div>
+
+  <button onclick="submitForm()">Add</button>
+
+  <script>
+    function submitForm() {
+      const PRODUCT_ID = document.getElementById('PRODUCT_ID').value;
+      const PRODUCT_DESC = document.getElementById('PRODUCT_DESC').value;
+      const DEMAND_ORDER_NBR = document.getElementById('DEMAND_ORDER_NBR').value;
+      const MAKE_QTY = document.getElementById('MAKE_QTY').value;
+      const DUE_DATE = document.getElementById('DUE_DATE').value;
+      const START_DATE = document.getElementById('START_DATE').value;
+      const END_DATE = document.getElementById('END_DATE').value;
+      const SHIPPING_LOC = document.getElementById('SHIPPING_LOC').value;
+      const MFG_ORDER_NBR = document.getElementById('MFG_ORDER_NBR').value;
+
+      fetch("http://localhost:5100/load/StartOrder",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          PRODUCT_ID: PRODUCT_ID,
+          PRODUCT_DESC: PRODUCT_DESC,
+          DEMAND_ORDER_NBR: DEMAND_ORDER_NBR,
+          MAKE_QTY: MAKE_QTY,
+          DUE_DATE: DUE_DATE,
+          START_DATE: START_DATE,
+          END_DATE: END_DATE,
+          SHIPPING_LOC: SHIPPING_LOC,
+          MFG_ORDER_NBR: MFG_ORDER_NBR
+        }).then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error))
+      });
+
+      alert("Order Added Successfully");
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+@code{}
