@@ -8,7 +8,7 @@ need to be added:   add a list of orders
 *@
 
 
-<PageTitle>Home</PageTitle>
+<PageTitle>New Order</PageTitle>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +37,6 @@ need to be added:   add a list of orders
     input[type="datetime-local"],
     input[type="text"],
     input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
   </style>
 </head>
 <body>
@@ -50,56 +44,51 @@ need to be added:   add a list of orders
   <h1>Text Input Boxes</h1>
 
   <div class="input-group">
-    <label for="name">Name:</label>
-    <input type="text" id="PRODUCT_ID" placeholder="Produce ID">
+    <label for="PRODUCT_ID">Product ID:</label>
+    <input type="text" id="PRODUCT_ID" placeholder="Product ID">
   </div>
 
   <div class="input-group">
-    <label for="email">Email:</label>
-    <input type="email" id="PRODUCT_DESC" placeholder="Product Description">
+    <label for="PRODUCT_DESC">Product Description:</label>
+    <input type="text" id="PRODUCT_DESC" placeholder="Product Description">
   </div>
 
   <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="DEMAND_ORDER_NBR" placeholder="Demand Order Number">
-  </div>
-  
-  <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="MAKE_QTY" placeholder="Make Quantity">
+    <label for="DEMAND_ORDER_NBR">Demand Order Number:</label>
+    <input type="text" id="DEMAND_ORDER_NBR" placeholder="Demand Order Number">
   </div>
   
   <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="DUE_DATE" placeholder="Due Date">
+    <label for="MAKE_QTY">Make Quantity:</label>
+    <input type="number" id="MAKE_QTY" placeholder="Make Quantity">
+  </div>
+  
+  <div class="input-group">
+    <label for="DUE_DATE">Due Date:</label>
+    <input type="datetime-local" id="DUE_DATE" placeholder="Due Date">
   </div>
 
   <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="START_DATE" placeholder="START DATE">
-  </div>
-
-
-  <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="END_DATE" placeholder="End Date">
-  </div>
-
-
-  <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="SHIPPING_LOC" placeholder="SHIPPING LOCATION">
+    <label for="START_DATE">START DATE:</label>
+    <input type="datetime-local" id="START_DATE" placeholder="START DATE">
   </div>
 
 
   <div class="input-group">
-    <label for="password">Password:</label>
-    <input type="password" id="MFG_ORDER_NBR" placeholder="MFG ORDER NBR">
+    <label for="END_DATE">End Date:</label>
+    <input type="datetime-local" id="END_DATE" placeholder="End Date">
   </div>
 
+
   <div class="input-group">
-    <label for="message">Message:</label>
-    <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+    <label for="SHIPPING_LOC">SHIPPING LOCATION:</label>
+    <input type="text" id="SHIPPING_LOC" placeholder="SHIPPING LOCATION">
+  </div>
+
+
+  <div class="input-group">
+    <label for="MFG_ORDER_NBR">MFG ORDER NBR:</label>
+    <input type="text" id="MFG_ORDER_NBR" placeholder="MFG ORDER NBR">
   </div>
 
   <button onclick="submitForm()">Add</button>

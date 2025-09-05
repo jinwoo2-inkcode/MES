@@ -86,4 +86,3 @@ C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\refint\ma
 C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.pdb
 C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\main.genruntimeconfig.cache
 C:\Users\peter\OneDrive\Documents\GitHub\MES\src\main\obj\Debug\net9.0\ref\main.dll
-C:\Users\Jason Kim\Documents\GitHub\MES\src\main\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
