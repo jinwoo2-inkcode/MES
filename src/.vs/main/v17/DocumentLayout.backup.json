@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{08583B2C-4C69-4EC1-ACAD-397070B0EB13}|MES_Interface\\MES_Interface.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\mes_interface\\pages\\neworder.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08583B2C-4C69-4EC1-ACAD-397070B0EB13}|MES_Interface\\MES_Interface.csproj|solutionrelative:mes_interface\\pages\\neworder.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{08583B2C-4C69-4EC1-ACAD-397070B0EB13}|MES_Interface\\MES_Interface.csproj|c:\\users\\jason kim\\documents\\github\\mes\\src\\mes_interface\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{08583B2C-4C69-4EC1-ACAD-397070B0EB13}|MES_Interface\\MES_Interface.csproj|solutionrelative:mes_interface\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
@@ -14,11 +18,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NewOrder.razor",
+              "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\Pages\\NewOrder.razor",
+              "RelativeDocumentMoniker": "MES_Interface\\Pages\\NewOrder.razor",
+              "ToolTip": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\Pages\\NewOrder.razor",
+              "RelativeToolTip": "MES_Interface\\Pages\\NewOrder.razor",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-05T18:21:34.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\Jason Kim\\Documents\\GitHub\\MES\\src\\MES_Interface\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "MES_Interface\\Layout\\NavMenu.razor",
@@ -26,12 +47,7 @@
               "RelativeToolTip": "MES_Interface\\Layout\\NavMenu.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-05T18:20:59.771Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-09-05T18:20:59.771Z"
             }
           ]
         }

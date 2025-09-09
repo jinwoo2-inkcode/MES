@@ -53,8 +53,8 @@ public static class ProductionEndPoints
 
     }
     /**
-    Name: GetAllLoad()
-    Summary: Get all load information associated to a given time frame
+    Name: GetAllProductionPlans()
+    Summary: Get all production information associated to a given time frame
     param: start_datetime, end_datetime
     returns: JsonResults
     **/
@@ -68,8 +68,8 @@ public static class ProductionEndPoints
 
         const string sql = @"
             SELECT * 
-            FROM MES_LOAD
-            WHERE CREATE_DATETIME BETWEEN @s AND @e";
+            FROM MES_PRODUCTION_PLAN
+            WHERE DUE_DATE BETWEEN @s AND @e";
 
         using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
@@ -86,22 +86,22 @@ public static class ProductionEndPoints
 
     }
     /**
-    Name: GetLoad()
-    Summary: Get the load information associated to a given load ID
-    param: L_ID
+    Name: GetProduction()
+    Summary: Get the production information associated to a given demand order number
+    param: demand_ord_nbr
     returns: JsonResults
     **/
     [Obsolete]
-    public static string GetProduction(string Load_ID)
+    public static string GetProduction(string Demand_ord_nbr)
     {
         const string sql = @"
             SELECT * 
-            FROM MES_LOAD
-             WHERE LOAD_ID = @l";
+            FROM MES_PRODUCTION_PLAN
+             WHERE DEMAND_ORD_NBR = @d";
 
         using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
-        cmd.Parameters.Add("@l", SqlDbType.VarChar).Value = Load_ID;
+        cmd.Parameters.Add("@d", SqlDbType.VarChar).Value = Demand_ord_nbr;
 
         cnn.Open();
         using var reader = cmd.ExecuteReader();
@@ -114,8 +114,8 @@ public static class ProductionEndPoints
 
     }
     /**
-    Name: StartLoad()
-    Summary: Create new load; 
+    Name: StartProduction()
+    Summary: Start a production; 
     param: Product_Id,Product_Desc, Demand_Ord_Nbr, Load_Qty, Create_Date, Load_Id, active
     returns: null
     **/
@@ -123,24 +123,20 @@ public static class ProductionEndPoints
     public static void StartProduction(string PRODUCT_ID,
                                 string PRODUCT_DESC,
                                 string DEMAND_ORD_NBR,
-                                double LOAD_QTY,
-                                //DateTime CREATE_DATETIME,
-                                string LOAD_ID,
-                                int ACTIVE)
+                                string WORKCENTER,
+                                DateTime DUE_DATE)
     {
         const string sql = @"
-            INSERT INTO dbo.MES_LOAD (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE) 
-            VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @LOAD_QTY, GETDATE(), @LOAD_ID, @ACTIVE)";
+            INSERT INTO dbo.MES_PRODUCTION_PLAN (PRODUCT_ID, PRODUCT_DESC, DEMAND_ORD_NBR, LOAD_QTY, CREATE_DATETIME, LOAD_ID, ACTIVE) 
+            VALUES (@PRODUCT_ID, @PRODUCT_DESC, @DEMAND_ORD_NBR, @WORKCENTER, @DUE_DATE)";
 
         using var cnn = new SqlConnection(Functional.DatabaseConnectionString());
         using var cmd = new SqlCommand(sql, cnn);
         cmd.Parameters.Add("@PRODUCT_ID", SqlDbType.VarChar).Value = PRODUCT_ID;
         cmd.Parameters.Add("@PRODUCT_DESC", SqlDbType.VarChar).Value = PRODUCT_DESC;
         cmd.Parameters.Add("@DEMAND_ORD_NBR", SqlDbType.VarChar).Value = DEMAND_ORD_NBR;
-        cmd.Parameters.Add("@LOAD_QTY", SqlDbType.Int).Value = LOAD_QTY;
-        //cmd.Parameters.Add("@CREATE_DATETIME", SqlDbType.DateTime2).Value = CREATE_DATETIME;
-        cmd.Parameters.Add("@LOAD_ID", SqlDbType.VarChar).Value = LOAD_ID;
-        cmd.Parameters.Add("@ACTIVE", SqlDbType.SmallInt).Value = ACTIVE;
+        cmd.Parameters.Add("@WORKCENTER", SqlDbType.Int).Value = WORKCENTER;
+        cmd.Parameters.Add("@DUE_DATE", SqlDbType.DateTime2).Value = DUE_DATE;
 
         cnn.Open();
         using var reader = cmd.ExecuteReader();
