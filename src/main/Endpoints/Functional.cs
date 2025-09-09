@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 public static class Functional
 {
     //connection string variable - did not decide where to put this
-    public static string ConnectionString = "Server=mes.cgv4qeum0qbf.us-east-1.rds.amazonaws.com,1433;Database=MES;Integrated Security = false;User ID=admin;Password=Duksu123!;";
+    public static string ConnectionString = "";
 
     [Obsolete]
     public static void CheckConnection(this WebApplication app)
