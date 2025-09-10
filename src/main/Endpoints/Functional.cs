@@ -8,6 +8,11 @@ public static class Functional
     //connection string variable - did not decide where to put this
     public static string ConnectionString = "";
 
+    public static void Init(IConfiguration configuration)
+    {
+        ConnectionString = configuration.GetConnectionString("DefaultConnection");
+    }
+
     [Obsolete]
     public static void CheckConnection(this WebApplication app)
     {

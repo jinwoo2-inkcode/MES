@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c05dac570759265fca51ad0b3d61631e5d5a2cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c9cf7b9e19d5388f0e9174bd1a08cdef4dfc388")]
 [assembly: System.Reflection.AssemblyProductAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MES_Interface")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

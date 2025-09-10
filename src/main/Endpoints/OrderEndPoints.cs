@@ -37,6 +37,9 @@ public static class OrderEndPoints
         app.MapGet("/load/UpdateOrder", UpdateOrder);
     }
 
+    //add api handling?
+    //request validation->service layer->data access layer try look into this
+
     /**
     Name: GetOrder()
     Summary: Get the mfg order information associated to a given mfg_order_nbr
